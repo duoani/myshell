@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Absolute path to this script, e.g. /home/user/bin/foo.sh
+SCRIPT=$(readlink "$0")
+# Absolute path this script is in, thus /home/user/bin
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+p='./'
+
+function copy()
+{
+    eval "cp ${SCRIPTPATH}/tpl/.jshint $p"
+    eval "cp ${SCRIPTPATH}/tpl/.tern-project $p"
+    eval "cp ${SCRIPTPATH}/tpl/bower.json $p"
+    eval "cp ${SCRIPTPATH}/tpl/.bowerrc $p"
+    eval "cp ${SCRIPTPATH}/tpl/gulpfile.js $p"
+}
+#res=`cp ./tpl/.jshint ./`
+function usage()
+{
+    echo "Usage:  jsproj init"
+    exit 1
+}
+
+function init(){
+    case $1 in
+        init)
+            copy
+            ;;
+        *)
+            usage
+            ;;
+    esac
+}
+
+init $@
